@@ -1,32 +1,30 @@
 //importing the modules
 import express from 'express'
-import mongoose from 'mongoose'
 
 const app = express();
-const port = process.env.PORT || 9000;
+const port = process.env.PORT || 3000;
 
 //body parser
 app.use(express.json())
 
 //data
 
-const coustumers = [
-    {name:"Rakesh Sripelly" , id:1},
-    {name:"RAMESH Sripelly" , id:2},
-    {name:"JUNNU Sripelly" , id:3},
+const clients = [
+    {name:"Rakesh Sripelly" ,email:'' ,id:1},
 ]
 
 //Get method
 app.get('/',(req,res) =>{
-    res.send('welcome to the REST api')
+    res.send('welcome')
+    console.log(coustumers)
 })
 
-app.get('/api/coustumers',(req,res) =>{
-   res.send(coustumers)
+app.get('/api/clients',(req,res) =>{
+   res.send(clients)
 })
 
-app.get('/api/coustumers/:id',(req,res) =>{
-    const coustumer = coustumers.find( c => c.id === parseInt(req.params.id));
+app.get('/api/clients/:id',(req,res) =>{
+    const clients = clients.find( c => c.id === parseInt(req.params.id));
     if(!coustumer){
         res.send('coustemer not found')
     }
@@ -37,38 +35,38 @@ app.get('/api/coustumers/:id',(req,res) =>{
 
 //post methods
 
-app.post('/api/coustumers',(req,res) =>{
-    const coustumer = {
+app.post('/api/clients',(req,res) =>{
+    const client = {
         id:coustumers.length + 1,
         name : req.body.name
     }
-    coustumers.push(coustumer)
+    clients.push(client)
     res.send(coustumer)
 })
 
 //put methods
 
-app.put('/api/coustumers/:id',(req,res) =>{
-    const coustumer = coustumers.find( c => c.id === parseInt(req.params.id))
-    if(!coustumer){
-        res.send('there is no coustmer found')
+app.put('/api/clients/:id',(req,res) =>{
+    const client = clients.find( c => c.id === parseInt(req.params.id))
+    if(!clients){
+        res.send('there is no client found')
     }
     else{
-        coustumer.name = req.body.name;
-        res.send(coustumer)
+        client.name = req.body.name;
+        res.send(client)
     }
 })
 
 //delte
 
-app.delete('/api/coustumers/:id' ,(req,res) =>{
-    const coustumer = coustumers.find( c => c.id === parseInt(req.params.id))
-    if(!coustumer){
-        res.send('there is no coustmer found')
+app.delete('/api/clients/:id' ,(req,res) =>{
+    const client = clients.find( c => c.id === parseInt(req.params.id))
+    if(!client){
+        res.send('there is no client found')
     }else{
-        const index = coustumers.indexOf(coustumer)
-        coustumers.splice(index,1)
-        res.send(coustumer)
+        const index = clients.indexOf(client)
+        client.splice(index,1)
+        res.send(client)
     }
 
 })
