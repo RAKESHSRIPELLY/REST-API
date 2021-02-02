@@ -16,7 +16,7 @@ const clients = [
 //Get method
 app.get('/',(req,res) =>{
     res.send('welcome')
-    console.log(coustumers)
+    console.log(clients)
 })
 
 app.get('/api/clients',(req,res) =>{
@@ -24,12 +24,12 @@ app.get('/api/clients',(req,res) =>{
 })
 
 app.get('/api/clients/:id',(req,res) =>{
-    const clients = clients.find( c => c.id === parseInt(req.params.id));
-    if(!coustumer){
-        res.send('coustemer not found')
+    const client = clients.find( c => c.id === parseInt(req.params.id));
+    if(!client){
+        res.send('client not found')
     }
     else{
-        res.send(coustumer)
+        res.send(client)
     }
 })
 
